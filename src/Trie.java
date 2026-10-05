@@ -38,6 +38,7 @@ public class Trie {
             char c = palabra.charAt(i);
             int indice = c - 'A';
 
+            // si no existe el camino, la palabra no existe
             if (actual.P[indice] == null){
                 return false;
             }
@@ -49,7 +50,6 @@ public class Trie {
             if (i == palabra.length() - 1){
                 return(actual.B & (1 << indice)) != 0;
             }
-            actual = actual.P[indice];
         }
         return false;
     }
