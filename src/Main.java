@@ -18,6 +18,7 @@ nueva entrada
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -105,9 +106,14 @@ public class Main {
 
                     ArrayList<String> sugerencias = trie.autocompletar(prefijo);
 
-                    for(String palabra : sugerencias){
-                        System.out.println(palabra);
+                    for (int i = 0; i < sugerencias.size(); i++){
+                        System.out.println((i + 1) + ". " + sugerencias.get(i));
                     }
+
+                    System.out.println("Seleccione una sugerencia");
+                    String entrada = scanner.nextLine();
+
+                    int seleccion = Integer.parseInt(entrada); 
 
                     break;
 

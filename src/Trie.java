@@ -95,17 +95,18 @@ public class Trie {
     // le damos un prefijo y queremos encontrar todas las palabras que comienzan con ese prefijo
 
     public ArrayList<String> autocompletar(String prefijo){
-        // volvemos a usar la logica de buscar
+
+        // comenzamos desde la raiz
         NodoTrie actual = raiz;
 
         for (int i = 0; i < prefijo.length(); i++){
+
             char c = prefijo.charAt(i);
             int indice = c - 'A';
 
             if(actual.P[indice] == null){
                 return new ArrayList<>();
             }
-            actual = actual.P[indice];
 
             actual = actual.P[indice];
         }
@@ -119,24 +120,22 @@ public class Trie {
         completar(actual, prefijo, sugerencias);
 
         return sugerencias;
-
     }
 
+    // funcion auxiliar
     private void completar(NodoTrie actual, String palabra, ArrayList<String> sugerencias){
-
-        for (int i = 0; i < 26; i++){
-
+        for(int i = 0; i < 26; i++){
             if(actual.P[i] != null){
-
                 char letra = (char) ('A' + i);
+
                 String nuevaPalabra = palabra + letra;
 
                 if((actual.B & (1 << i)) != 0){
                     sugerencias.add(nuevaPalabra);
                 }
-
                 completar(actual.P[i], nuevaPalabra, sugerencias);
             }
         }
+
     }
 }
