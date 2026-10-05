@@ -62,10 +62,12 @@ public class Trie {
 
 
     public void eliminar(String palabra) {
-        // podemos reutilizar parte de la funcion anterior
+
         NodoTrie actual = raiz;
 
-        for (int i = 0; i < palabra.length(); i++) {
+        // avanzamos hasta el nodo anterior a la última letra
+        for (int i = 0; i < palabra.length() - 1; i++) {
+
             char c = palabra.charAt(i);
             int indice = c - 'A';
 
@@ -76,13 +78,18 @@ public class Trie {
             actual = actual.P[indice];
         }
 
-        // encontramos el indice de la ultima letra
+        // índice de la última letra
         int indice = palabra.charAt(palabra.length() - 1) - 'A';
 
-        // eliminamos
-        int mascara = 1 << indice; // seleccionamos el bit
-        mascara = ~mascara;        // invertimos la máscara
-        actual.B = actual.B & mascara; // apagamos ese bit
+        // si no existe el camino hacia la última letra, no hacemos nada
+        if (actual.P[indice] == null) {
+            return;
+        }
+
+        // apagamos el bit que indica que esta letra completa una palabra
+        int mascara = 1 << indice;
+        mascara = ~mascara;
+        actual.B = actual.B & mascara;
     }
 
     // le damos un prefijo y queremos encontrar todas las palabras que comienzan con ese prefijo
