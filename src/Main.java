@@ -113,7 +113,11 @@ public class Main {
                     System.out.println("Seleccione una sugerencia");
                     String entrada = scanner.nextLine();
 
-                    int seleccion = Integer.parseInt(entrada); 
+                    int seleccion = Integer.parseInt(entrada);
+
+                    String palabraSeleccionada = sugerencias.get(seleccion - 1);
+
+                    System.out.println("Palabra seleccionada: " + palabraSeleccionada);
 
                     break;
 
