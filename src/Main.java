@@ -69,7 +69,7 @@ public class Main {
                 // 1. Buscar palabra
                 case "1":
                     System.out.println("Ingrese la palabra que desea buscar:");
-                    String palabraBuscar = scanner.nextLine();
+                    String palabraBuscar = scanner.nextLine().toUpperCase();
 
                     if(trie.buscar(palabraBuscar)){
                         System.out.println("La palabra existe.");
@@ -82,7 +82,7 @@ public class Main {
                 // 2. Insertar palabra
                 case "2":
                     System.out.println("ingrese la palabra que desea insertar: ");
-                    String palabraInsertar = scanner.nextLine();
+                    String palabraInsertar = scanner.nextLine().toUpperCase();
 
                     trie.insertar(palabraInsertar);
 
@@ -92,7 +92,7 @@ public class Main {
                 // 3. Eliminar palabra
                 case "3":
                     System.out.println("Ingrese la palabra que desea eliminar: ");
-                    String palabraEliminar = scanner.nextLine();
+                    String palabraEliminar = scanner.nextLine().toUpperCase();
 
                     trie.eliminar(palabraEliminar);
 
@@ -102,7 +102,7 @@ public class Main {
                 // 4. Autocompletar palabra
                 case "4":
                     System.out.println("Ingrese el prefijo: ");
-                    String prefijo = scanner.nextLine();
+                    String prefijo = scanner.nextLine().toUpperCase();
 
                     ArrayList<String> sugerencias = trie.autocompletar(prefijo);
 
@@ -111,7 +111,7 @@ public class Main {
                     }
 
                     System.out.println("Seleccione una sugerencia");
-                    String entrada = scanner.nextLine();
+                    String entrada = scanner.nextLine().toUpperCase();
 
                     int seleccion = Integer.parseInt(entrada);
 
