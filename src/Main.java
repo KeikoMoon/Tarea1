@@ -56,9 +56,8 @@ public class Main {
             System.out.println("1. Buscar palabra");
             System.out.println("2. Insertar palabra");
             System.out.println("3. Eliminar palabra");
-            System.out.println("4. Autocompletar");
-            System.out.println("5. Completar palabra");
-            System.out.println("6. Salir");
+            System.out.println("4. Autocompletar palabra");
+            System.out.println("5. Salir");
             System.out.println("");
             System.out.print("Seleccione una opción: ");
 
@@ -69,9 +68,9 @@ public class Main {
                 // 1. Buscar palabra
                 case "1":
                     System.out.println("Ingrese la palabra que desea buscar:");
-                    String palabra = scanner.nextLine();
+                    String palabraBuscar = scanner.nextLine();
 
-                    if(trie.buscar(palabra)){
+                    if(trie.buscar(palabraBuscar)){
                         System.out.println("La palabra existe.");
                     } else {
                         System.out.println("La palabra no existe");
@@ -99,46 +98,21 @@ public class Main {
                     System.out.println("Palabra eliminada. ");
                     break;
 
-                // 4. Autocompletar
+                // 4. Autocompletar palabra
                 case "4":
                     System.out.println("Ingrese el prefijo: ");
                     String prefijo = scanner.nextLine();
 
-                    trie.autocompletar(prefijo);
+                    ArrayList<String> sugerencias = trie.autocompletar(prefijo);
 
-                    break;
-                // 5. Completar palabra
-                case "5":
-                    System.out.println("Ingrese la palabra que desea completar: ");
-                    String palabraCompletar = scanner.nextLine();
-
-                    ArrayList<String> sugerencias = trie.autocompletar(palabraCompletar);
-
-                    if(sugerencias.isEmpty()){
-                        System.out.println("No hay sugerencias. ");
-                    } else {
-                        System.out.println("Sugerencias: ");
-
-                        for(int i = 0; i < sugerencias.size(); i++){
-                            System.out.println((i + 1) + ". " + sugerencias.get(i));
-                        }
-
-                        System.out.println("Seleccione una sugerencia: ");
-                        int seleccion  = Integer.parseInt(scanner.nextLine());
-
-                        if(seleccion >= 1 && seleccion <= sugerencias.size()){
-                            String palabraSeleccionada = sugerencias.get(seleccion - 1);
-
-                            System.out.println("Palabra completada: " + palabraSeleccionada);
-                        } else {
-                            System.out.println("Selección no válida.");
-                        }
-
+                    for(String palabra : sugerencias){
+                        System.out.println(palabra);
                     }
+
                     break;
 
-                // 6. Salir
-                case "6":
+                // 5. Salir
+                case "5":
                     salir = true;
                     break;
 

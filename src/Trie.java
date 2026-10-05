@@ -12,29 +12,33 @@ public class Trie {
         NodoTrie actual = raiz; // comenzamos desde la raiz
 
         for (int i = 0; i < palabra.length(); i++){ // recorremos la palabra letra por letra
-            char c  = palabra.charAt(i); // obtenemso la letra que está en la posición i
 
-            int indice = c - 'A'; // se guarda la posicion desde ascii a nuestra version
+            char c = palabra.charAt(i); // obtenemos la letra que está en la posición i
 
-            if (actual.P[indice] == null){ // si el nodo no esta creado, se crea
+            int indice = c - 'A'; // obtenemos el índice 0-25
+
+            if (actual.P[indice] == null){ // si el nodo no está creado, se crea
                 actual.P[indice] = new NodoTrie();
             }
 
-            actual = actual.P[indice]; // nos paramos en este nodo
+            // si estamos en la última letra,
+            // marcamos que esta letra completa una palabra
+            if (i == palabra.length() - 1){
+                actual.B = actual.B | (1 << indice);
+            }
+
+            actual = actual.P[indice]; // nos movemos al siguiente nodo
         }
-        int indice = palabra.charAt(palabra.length() - 1) - 'A';
-
-        actual.B = actual.B | (1 << indice);
     }
-
 
     // Comprueba que la palabra realmente exista
     public boolean buscar(String palabra){
 
-        // podemos reutilizar parte de la funcion anterior
+        // comenzamos desde la raiz
         NodoTrie actual = raiz;
 
         for (int i = 0; i < palabra.length(); i++){
+
             char c = palabra.charAt(i);
             int indice = c - 'A';
 
@@ -43,14 +47,16 @@ public class Trie {
                 return false;
             }
 
-            actual = actual.P[indice];
-
-            // si estamos en la última letra
+            // si estamos en la última letra,
             // comprobamos si esa letra termina una palabra
             if (i == palabra.length() - 1){
-                return(actual.B & (1 << indice)) != 0;
+                return (actual.B & (1 << indice)) != 0;
             }
+
+            // avanzamos al siguiente nodo
+            actual = actual.P[indice];
         }
+
         return false;
     }
 
